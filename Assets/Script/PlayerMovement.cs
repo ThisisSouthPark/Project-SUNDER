@@ -6,11 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
     // [C언어 비교] 구조체의 멤버 변수를 선언하는 것과 같습니다.
     // [SerializeField]나 public을 붙이면 유니티 인스펙터(우측 창)에서 마우스로 수치를 조절할 수 있습니다.
-    [Header("이동 및 시선 속도 설정")]
-    public float moveSpeed = 5.0f;           // 캐릭터 이동 속도
-    public float mouseSensitivity = 200.0f;   // 마우스 회전 민감도
+    [Header("이동 및 시선 속도 설정")] // Using JSON
+    public float moveSpeed;           // 캐릭터 이동 속도
+    public float mouseSensitivity;   // 마우스 회전 민감도
 
-    [Header("연결할 유니티 컴포넌트")]
+    [Header("연결할 유니티 컴포넌트")]  //Don't Need to Using JSON
     public CharacterController controller;   // 부모(PlayerBody)의 캐릭터 컨트롤러
     public Transform cameraTransform;       // 자식(Head)의 위치/회전 정보
 
