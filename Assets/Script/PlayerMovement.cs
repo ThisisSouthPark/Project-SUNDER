@@ -42,7 +42,10 @@ public class PlayerMovement : MonoBehaviour
         // Application.persistentDataPath는 유니티가 보장하는 안전한 저장 경로입니다.
         // C:\Users\유저이름\AppData\LocalLow\회사이름\프로젝트이름 폴더에 저장됩니다.
         // =================================================================
-        jsonFilePath = Path.Combine(Application.persistentDataPath, "StreamingAssets", "PlayerConfig.json");
+        //jsonFilePath = Path.Combine(Application.persistentDataPath, "StreamingAssets", "PlayerConfig.json");
+        // persistentDataPath 대신 dataPath를 사용하면 'Assets' 폴더를 가리킵니다.
+        jsonFilePath = Path.Combine(Application.dataPath, "StreamingAssets", "PlayerConfig.json");
+
 
         LoadSettings();
     }

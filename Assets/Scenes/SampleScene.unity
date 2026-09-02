@@ -581,10 +581,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7869ed7d4f6b0194c83b24dfe90ed67b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  mouseSensitivity: 200
   controller: {fileID: 1756247541}
   cameraTransform: {fileID: 963194228}
+  settings:
+    moveSpeed: 5
+    mouseSensitivity: 200
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
