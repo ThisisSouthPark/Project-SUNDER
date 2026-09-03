@@ -8,9 +8,14 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        jsontest jtest = new jsontest(); //하나의 문자열을 JSON으로 변환
-        string jsondata = JsonConvert.SerializeObject(jtest);
+
+        //JSON 파일을 저장 및 로드
+        jsontest jTest = new jsontest(); //하나의 문자열을 JSON으로 변환
+        string jsondata = JsonConvert.SerializeObject(jTest);
         Debug.Log(jsondata);
+
+        jsontest jTest2 = JsonConvert.DeserializeObject<jsontest>(jsondata);
+        jTest2.print();
     }
 
     // Update is called once per frame
