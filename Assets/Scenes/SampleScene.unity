@@ -578,14 +578,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1756247540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7869ed7d4f6b0194c83b24dfe90ed67b, type: 3}
+  m_Script: {fileID: 11500000, guid: c8f3b8ab7eb4e2343816fe0399ff72b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1756247541}
-  cameraTransform: {fileID: 963194228}
-  settings:
-    moveSpeed: 5
-    mouseSensitivity: 200
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

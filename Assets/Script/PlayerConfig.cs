@@ -42,15 +42,17 @@ public class NewBehaviourScript : MonoBehaviour
 
         public void print()
         {
-            Debug.Log("int = " + i);  //C언어처럼 변수에 맞는 서식 지정을 하고 쉼표한 후 변수를 안넣어도 됨, 간단히 +로 표현 
-            Debug.Log("floatloat = " +  flo);
-            Debug.Log("string = " +  str);
-            Debug.Log("bool = " +  bo);
+            Debug.Log("int = \n" + i);  //C언어처럼 변수에 맞는 서식 지정을 하고 쉼표한 후 변수를 안넣어도 됨, 간단히 +로 표현 
+            Debug.Log("floatloat = \n" +  flo);
+            Debug.Log("string = \n" +  str);
+            Debug.Log("bool = \n" +  bo);
 
             for (int idx = 0; idx < iarr.Length; idx++)
             {  //iarr 배열의 수를 다 출력할떄까지 실행
-                Debug.Log(string.Format("iarr [{0}] = {1} ", idx, iarr[idx]));
+                Debug.Log(string.Format("iarr [{0}] = {1} \n", idx, iarr[idx]));
             }
+            //Debug.Log("iVector = " + iVector.x "," +  iVector.y);
+            Debug.Log($"ivector = {iVector.x}, {iVector.y} \n");
         }
 
         public class IntVector2  //플레이어가 직접 조종하면 바뀌어야하는 변수, 움직임
