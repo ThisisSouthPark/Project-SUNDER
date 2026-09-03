@@ -1,15 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO; //파일 읽는 라이브러리
 
-[System.Serializable] //JSON을 받을 값들입니다.
-public class PlayerSettings
-{
-    [Header("이동 및 시선 속도 설정")]      // Using JSON
-    public float moveSpeed = 0f;           // 캐릭터 이동 속도
-    public float mouseSensitivity =0f;    // 마우스 회전 민감도
-}
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,11 +12,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("연결할 유니티 컴포넌트")]        //Don't Need to Using JSON
     public CharacterController controller;   // 부모(PlayerBody)의 캐릭터 컨트롤러
     public Transform cameraTransform;       // 자식(Head)의 위치/회전 정보
-    [Header("JSON 바구니")]
-    public PlayerSettings settings;
+    [Header("플레이어 움직임 ")]
+    public float moveSpeed = 0f;           // 캐릭터 이동 속도
+    public float mouseSensitivity = 0f;
 
-    private float xRotation = 0f;            // 마우스 위아래(상하) 회전값을 누적 저장할 변수
-    private string jsonFilePath;               
+    private float xRotation = 0f;            // 마우스 위아래(상하) 회전값을 누적 저장할 변수           
 
     // [유니티 기초] 게임이 시작될 때 딱 한 번 실행되는 함수입니다 (C언어의 main 초기화 부분)
     void Start()
@@ -37,17 +29,6 @@ public class PlayerMovement : MonoBehaviour
         {
             controller = GetComponent<CharacterController>();
         }
-        // =================================================================
-        // [JSON 불러오기 핵심] 
-        // Application.persistentDataPath는 유니티가 보장하는 안전한 저장 경로입니다.
-        // C:\Users\유저이름\AppData\LocalLow\회사이름\프로젝트이름 폴더에 저장됩니다.
-        // =================================================================
-        //jsonFilePath = Path.Combine(Application.persistentDataPath, "StreamingAssets", "PlayerConfig.json");
-        // persistentDataPath 대신 dataPath를 사용하면 'Assets' 폴더를 가리킵니다.
-        jsonFilePath = Path.Combine(Application.dataPath, "StreamingAssets", "PlayerConfig.json");
-
-
-        LoadSettings();
     }
 
     // [유니티 핵심] 매 프레임마다 화면이 갱신될 때 계속 실행되는 함수입니다 (무한 루프 while문 느낌)
@@ -59,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
         // 마우스의 좌우(X), 상하(Y) 움직임 값을 가져옵니다.
         // Time.deltaTime은 컴퓨터 성능(프레임)에 상관없이 회전 속도를 일정하게 맞춰주는 보정값입니다.
-        float mouseX = Input.GetAxis("Mouse X") * settings.mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * settings.mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         // 마우스를 위로 올리면 화면이 위를 봐야 하므로, 누적된 상하 회전값에서 mouseY를 '뺍니다'.
         xRotation -= mouseY;
@@ -87,24 +68,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDirection = (transform.forward * z) + (transform.right * x);
 
         // Character Controller 컴포넌트의 Move 함수를 이용해 실제로 물리 이동을 시킵니다.
-        controller.Move(moveDirection * settings.moveSpeed * Time.deltaTime);
-    }
-    void LoadSettings()
-    {
-        // 만약 지정된 경로에 JSON 파일이 이미 존재한다면? 읽어오기!
-        if (File.Exists(jsonFilePath))
-        {
-            string jsonText = File.ReadAllText(jsonFilePath);
-            settings = JsonUtility.FromJson<PlayerSettings>(jsonText);
-            Debug.Log($"[JSON 성공] 세팅을 파일에서 불러왔습니다! 경로: {jsonFilePath}");
-        }
-        else
-        {
-            // 만약 처음 실행해서 파일이 없다면? 기본값으로 새 파일을 만들어버립니다.
-            settings = new PlayerSettings();
-            string jsonText = JsonUtility.ToJson(settings, true); // true를 주면 메모장처럼 예쁘게 정렬됨
-            File.WriteAllText(jsonFilePath, jsonText);
-            Debug.Log($"[JSON 안내] 파일이 없어서 기본값으로 새로 만들었습니다! 경로: {jsonFilePath}");
-        }
+        controller.Move(moveDirection * moveSpeed * Time.deltaTime);
     }
 }
