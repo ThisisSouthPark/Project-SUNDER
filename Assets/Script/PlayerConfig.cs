@@ -42,7 +42,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         public void print()
         {
-            Debug.Log("int = " + i);
+            Debug.Log("int = " + i);  //C언어처럼 변수에 맞는 서식 지정을 하고 쉼표한 후 변수를 안넣어도 됨, 간단히 +로 표현 
             Debug.Log("floatloat = " +  flo);
             Debug.Log("string = " +  str);
             Debug.Log("bool = " +  bo);
